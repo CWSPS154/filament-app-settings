@@ -1,0 +1,26 @@
+<?php
+
+namespace {{ namespace }};
+
+use Filament\Forms\Components\Tabs\Tab;
+
+class {{ class }}
+{
+    /**
+     * @return Tab
+     */
+    public static function getTab(): Tab
+    {
+        return Tab::make('{{ state }}')
+                    ->label(__('{{ class }}'))
+                    ->icon('heroicon-o-computer-desktop')
+                    ->schema(self::getFields())
+                    ->columns()
+                    ->statePath('{{ state }}');
+    }
+
+    public static function getFields(): array
+    {
+        return [];
+    }
+}
