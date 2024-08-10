@@ -37,7 +37,7 @@ if (!function_exists('get_settings')) {
                     $current = $value;
                 }
             } catch (\Exception $e) {
-                return [];
+                return null;
             }
         }
         if ($key) {
