@@ -33,7 +33,13 @@ FilamentAppSettingsPlugin::make()->canAccess(function () {
 Here using `canAccess()` method you can prevent the view and edit access to the page and using `appAdditionalField()` method you can add additional sections to the default app tab which will available after you install this plugin.
 
 You can publish the config file `filament-app-settings.php`, by running this command
-`php artisan vendor:publish --tag=filament-app-settings-config`, which contains these settings
+
+```
+php artisan vendor:publish --tag=filament-app-settings-config
+```
+
+which contains these settings
+
 ```
 'layout' => null,
     'cluster' => null,
