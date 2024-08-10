@@ -13,10 +13,16 @@ use Closure;
 use CWSPS154\FilamentAppSettings\Page\AppSettings;
 use Filament\Contracts\Plugin;
 use Filament\Panel;
+use Filament\Support\Concerns\EvaluatesClosures;
 
 class FilamentAppSettingsPlugin implements Plugin
 {
-    public static bool $canAccess = true;
+    use EvaluatesClosures;
+
+    /**
+     * @var bool|Closure|mixed
+     */
+    protected bool|array $canAccess = true;
     public static array $appAdditionalFields = [];
 
     public function getId(): string
@@ -41,14 +47,24 @@ class FilamentAppSettingsPlugin implements Plugin
         return app(static::class);
     }
 
-    public function canAccess(bool|Closure $condition): static
+    public function canAccess(bool|Closure|string $ability = true, $arguments = null): static
     {
-        $access = true;
-        if ($condition instanceof Closure) {
-            $access = $condition();
+        if ($ability instanceof Closure) {
+            $this->canAccess = $this->evaluate($ability);
+        } elseif (is_string($ability) && !is_null($arguments)) {
+            $this->canAccess = [
+                'ability' => $ability,
+                'arguments' => $arguments,
+            ];
+        } else {
+            $this->canAccess = (bool)$ability;
         }
-        self::$canAccess = $access;
         return $this;
+    }
+
+    public function getCanAccess(): array|bool
+    {
+        return $this->canAccess;
     }
 
     public function appAdditionalField(array $additionalFields):static

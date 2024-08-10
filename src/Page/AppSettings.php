@@ -7,8 +7,9 @@
 
 namespace CWSPS154\FilamentAppSettings\Page;
 
-use CWSPS154\FilamentAppSettings\FilamentAppSettingsPlugin;
+use CWSPS154\FilamentAppSettings\FilamentAppSettingsServiceProvider;
 use CWSPS154\FilamentAppSettings\Settings\Forms\AppForm;
+use Filament\Facades\Filament;
 use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Components\Tabs;
 use Filament\Forms\Form;
@@ -17,6 +18,7 @@ use Filament\Pages\Page;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
 
 class AppSettings extends Page
@@ -144,7 +146,12 @@ class AppSettings extends Page
 
     public static function canAccess(): bool
     {
-        return FilamentAppSettingsPlugin::$canAccess;
+        $plugin = Filament::getCurrentPanel()?->getPlugin(FilamentAppSettingsServiceProvider::$name);
+        $access = $plugin->getCanAccess();
+        if (!empty($access) && is_array($access) && isset($access['ability'], $access['arguments'])) {
+            return Gate::allows($access['ability'], $access['arguments']);
+        }
+        return $access;
     }
 
     protected static function getClassesInNamespace(string $namespace): array
