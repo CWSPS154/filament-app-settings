@@ -36,8 +36,8 @@ class FilamentAppSettingsServiceProvider extends PackageServiceProvider
                     ->askToRunMigrations()
                     ->endWith(function(InstallCommand $command) {
                         $command->info('I hope this package will help you to build custom settings with desired filament form Components/Input');
-                    });
-//                    ->askToStarRepoOnGitHub('your-vendor/your-repo-name');
+                    })
+                    ->askToStarRepoOnGitHub('cwsps154/filament-app-settings');
             });
     }
 
