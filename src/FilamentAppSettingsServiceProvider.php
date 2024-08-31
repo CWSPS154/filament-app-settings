@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace CWSPS154\FilamentAppSettings;
 
 use CWSPS154\FilamentAppSettings\Commands\CreateSettingsTab;
+use CWSPS154\FilamentAppSettings\Database\Seeders\DatabaseSeeder;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
@@ -35,6 +36,13 @@ class FilamentAppSettingsServiceProvider extends PackageServiceProvider
                     ->publishMigrations()
                     ->askToRunMigrations()
                     ->endWith(function(InstallCommand $command) {
+                        if ($command->confirm('Do you wish to run the seeder for cwsps154/filament-users-roles-permissions ?')) {
+                            $command->comment('The seeder is filled with "admin" as panel id, please check the route name for your panel');
+                            $command->comment('Running seeder...');
+                            $command->call('db:seed', [
+                                'class' => DatabaseSeeder::class
+                            ]);
+                        }
                         $command->info('I hope this package will help you to build custom settings with desired filament form Components/Input');
                     })
                     ->askToStarRepoOnGitHub('CWSPS154/filament-app-settings.git');

@@ -14,7 +14,8 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "CWSPS154\\FilamentAppSettings\\": "src/"
+            "CWSPS154\\FilamentAppSettings\\": "src/",
+            "CWSPS154\\FilamentAppSettings\\Database\\Seeders\\": "database/seeders/"
         },
         "files": [
             "src/helper.php"
