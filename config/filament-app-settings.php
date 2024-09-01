@@ -9,6 +9,7 @@ return [
     'layout' => null,
     'cluster' => null,
     'navigation' => [
+        'title' => 'filament-app-settings::app-settings.app.settings.title',
         'group' => 'filament-app-settings::app-settings.system',
         'label' => 'filament-app-settings::app-settings.app.settings',
         'icon' => 'heroicon-o-cog-8-tooth',

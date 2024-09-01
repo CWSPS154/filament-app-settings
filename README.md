@@ -41,14 +41,17 @@ php artisan vendor:publish --tag=filament-app-settings-config
 which contains these settings
 
 ```
-'layout' => null,
+return [
+    'layout' => null,
     'cluster' => null,
     'navigation' => [
+        'title' => 'filament-app-settings::app-settings.app.settings.title',
         'group' => 'filament-app-settings::app-settings.system',
         'label' => 'filament-app-settings::app-settings.app.settings',
         'icon' => 'heroicon-o-cog-8-tooth',
         'sort' => 100,
     ]
+];
 ```
 You can create a custom tab to this settings using `php artisan make:app-settings-tab Custom` command, which will create a class inside `app/Filament/Settings/Forms` folder.
 

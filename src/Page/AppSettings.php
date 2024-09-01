@@ -129,6 +129,11 @@ class AppSettings extends Page
         return __(config('filament-app-settings.navigation.label'));
     }
 
+    public function getTitle(): string|Htmlable
+    {
+        return __(config('filament-app-settings.navigation.title'));
+    }
+
     public static function getNavigationIcon(): string|Htmlable|null
     {
         return config('filament-app-settings.navigation.icon');

@@ -7,6 +7,7 @@
 
 return [
     'app.settings' => 'App Settings',
+    'app.settings.title' => 'App Settings',
     'system' => 'System',
     'save' =>  'Save Settings',
     'save.success' =>  'Saved successfully',
