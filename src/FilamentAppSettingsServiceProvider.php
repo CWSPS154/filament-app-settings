@@ -30,7 +30,7 @@ class FilamentAppSettingsServiceProvider extends PackageServiceProvider
             ->hasInstallCommand(function(InstallCommand $command) {
                 $command
                     ->startWith(function(InstallCommand $command) {
-                        $command->info('Hi Mate, Thank you for installing My Package!');
+                        $command->info('Hi Mate, Thank you for installing Filament App Settings.');
                     })
                     ->publishConfigFile()
                     ->publishMigrations()
