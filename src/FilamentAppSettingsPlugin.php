@@ -34,7 +34,10 @@ class FilamentAppSettingsPlugin implements Plugin
     {
         $panel->pages([
             AppSettings::class
-        ]);
+        ])->brandName(get_settings('app.app_name') ?? config('app_name'))
+            ->darkModeBrandLogo(asset('storage/' . get_settings("app.app_dark_logo")))
+            ->brandLogo(asset('storage/' . get_settings("app.app_logo")))
+            ->favicon(asset('storage/' . get_settings("app.app_favicon")));
     }
 
     public function boot(Panel $panel): void
@@ -67,7 +70,7 @@ class FilamentAppSettingsPlugin implements Plugin
         return $this->canAccess;
     }
 
-    public function appAdditionalField(array $additionalFields):static
+    public function appAdditionalField(array $additionalFields): static
     {
         self::$appAdditionalFields = $additionalFields;
         return $this;
